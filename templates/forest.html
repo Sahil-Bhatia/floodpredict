@@ -1,0 +1,666 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+<meta charset="UTF-8"> 
+<title> Flood Prediction System </title>
+<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="   crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+flag=0;
+window.onload = function()
+{
+a = document.getElementById("location");
+var userloc = a.options[a.selectedIndex].value;
+report(userloc);
+};
+function report(loc){
+	$("#myTable tr td").html("");
+    //document.getElementById("myTable").value="";
+    //document.getElementById("tide").value="";
+    //document.getElementById("drainvalue").innerHTML="";
+    //document.getElementById("res").innerHTML="";
+if(loc=='Santacruz'){     
+    alert("santacruz");
+    document.getElementById('mapid').innerHTML = "<div id='smap' style='width: 100%; height: 100%;'></div>";
+    
+ var smap = L.map('smap').setView([ 19.084563, 72.834836 ], 13);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA', {    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA'
+}).addTo(smap);
+geojsonFeature_Santacruz={
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+  		"geometry": {
+       "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.82999992370605,
+              19.087994472614195
+            ],
+            [
+              72.82570838928223,
+              19.08823780693182
+            ],
+            [
+              72.82570838928223,
+              19.080430652608708
+            ],
+            [
+              72.83675909042358,
+              19.079883124080123
+            ],
+            [
+              72.83796072006224,
+              19.087710582124963
+            ],
+            [
+              72.82999992370605,
+              19.087994472614195
+            ]
+          ]
+        ]
+      },
+      "style": {
+        "stroke": "#555555",
+        "stroke-width": "2",
+        "stroke-opacity": 1.0,
+        "fillColor": '#ffffff',
+        "fill-opacity": 0.5
+      }    
+    }
+  ]
+};
+      myStyle_Santacruz = {
+    "color": "red",
+    "weight": 5,
+    "opacity": 0.8
+};
+    //var col=color_output();
+	//var col=0;
+    //if(col==1){
+	//L.geoJSON(geojsonFeature,{style:myStyle}).addTo(smap);
+	//} 
+    //else{
+	L.geoJSON(geojsonFeature_Santacruz).addTo(smap);
+	//}	
+      
+     
+}   
+else{
+    alert("colaba");
+
+	$("#myTable tr td").html("");
+    document.getElementById('mapid').innerHTML = "<div id='cmap' style='width: 100%; height: 100%;'></div>";
+    //mymap.remove();
+ var colabamap = new L.map('cmap').setView([ 18.92, 72.81 ], 13);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA'
+}).addTo(colabamap);
+ geojsonFeature_Colaba={
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "stroke": "#555555",
+        "stroke-width": 3,
+        "stroke-opacity": 1,
+        "fill": "#0c769e",
+        "fill-opacity": 0.5},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              72.81806945800781,
+              18.925448623194445
+            ],
+            [
+              72.82639503479004,
+              18.922282151953898
+            ],
+            [
+              72.82244682312012,
+              18.917166956302424
+            ],
+            [
+              72.8144645690918,
+              18.911645617107514
+            ],
+            [
+              72.80450820922852,
+              18.903525669500272
+            ],
+            [
+              72.80742645263672,
+              18.890370518100625
+            ],
+            [
+              72.83411979675293,
+              18.922038574758123
+            ],
+            [
+              72.84098625183105,
+              18.920252331142763
+            ],
+            [
+              72.83712387084961,
+              18.92731600118485
+            ],
+            [
+              72.81806945800781,
+              18.925448623194445
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+};
+     myStyle_Colaba = {
+    "color": "red",
+    "weight": 5,
+    "opacity": 0.8
+};
+    //var col=color_output();
+	//var col=1;
+    //if(col==1){
+	//L.geoJSON(geojsonFeature,{style:myStyle}).addTo(colabamap);
+	//}    else{
+	L.geoJSON(geojsonFeature_Colaba).addTo(colabamap);
+	//}	    
+}
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$(function() {
+          $('#fetchAPIData').bind('click', function() {
+          var word = $('#location option:selected').text();
+          alert(word);
+          $.ajax({
+           url: "/m",
+           type: "POST",
+           data: {word: word},
+           dataType: 'json',
+           success: function(response) {
+            //alert(response);
+           //$("#wordResult").html(response.data.weather[0].hourly[0].tempC);
+
+
+ var i,j,date,humidity,precipMM,tempC,pressure,windspeedKmph;
+
+                        
+              for (i = 0; i < 5; i++) { 
+                        date=response.data.weather[i].date;
+                        for(j=0;j<1;j++ ) {
+                            humidity=response.data.weather[i].hourly[j].humidity;
+                            precipMM=response.data.weather[i].hourly[j].precipMM;
+                            pressure=response.data.weather[i].hourly[j].pressure;
+                            tempC=response.data.weather[i].hourly[j].tempC;
+                            windspeedKmph=response.data.weather[i].hourly[j].windspeedKmph;
+
+                            document.getElementById("myTable").rows[i+1].cells[0].innerHTML=date;
+                            document.getElementById("myTable").rows[i+1].cells[1].innerHTML=humidity;
+                            document.getElementById("myTable").rows[i+1].cells[2].innerHTML=precipMM;
+                            document.getElementById("myTable").rows[i+1].cells[3].innerHTML=pressure;
+                            document.getElementById("myTable").rows[i+1].cells[4].innerHTML=tempC;
+                            document.getElementById("myTable").rows[i+1].cells[5].innerHTML=windspeedKmph;
+
+
+//$('#myTable').find('tr:#'+'i').find('td:eq(j)').html(date);
+
+}
+                    
+
+
+}
+
+
+
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+         }
+         });
+ return false;
+          });
+        });
+
+
+ $(function() {
+          $('#predict').bind('click', function() {
+
+          $.getJSON('/predict',
+          function(data) {
+          	//alert(data);
+			for(k=0;k<5;k++)
+{if (data[k]==0){document.getElementById("myTable").rows[k+1].cells[6].innerHTML="NO Flood";
+ }
+if(data[k]==1){		flag=1; document.getElementById("myTable").rows[k+1].cells[6].innerHTML="Flood";
+}
+
+
+
+}
+
+var a = document.getElementById("location");
+var userloc = a.options[a.selectedIndex].value;
+highlight(userloc);
+            });
+            return false;
+          });
+        });
+ $(function() {
+          $('#userpredict').bind('click', function() {
+          var loc = $('#user-location option:selected').text();
+          var humidity = $('#userhumidity').val();
+          var precipMM=$('#userrainfall').val();
+          var Temperature = $('#usertemperature').val();
+          var pressure=$('#userpressure').val();
+
+          //alert(word);
+          $.ajax({
+           url: "/userpredictfunction",
+           type: "POST",
+           data: {loc:loc, humidity:humidity,precipMM:precipMM,Temperature:Temperature,pressure:pressure},
+           //dataType: 'json',
+           success: function(response) {
+            //alert(response);
+           //$("#user-result").html(response);
+if(response==1){ flag=1;$("#user-result").html("Flood Occured"); highlight(loc); }
+else{ $("#user-result").html("No Flood");}
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+         }
+         });
+ return false;
+          });
+        });
+ $(document).ready(function() {
+       $('#notify').click(function(){
+           var word = $('#location option:selected').text();
+           $.ajax({
+           url: "/notify",
+           type: "POST",
+           data: {word: word},
+           success: function(response) {
+           	alert(response);
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+            alert(response);
+         }
+         });
+       });
+    });
+ function highlight(loc){
+
+//var a = document.getElementById("location");
+//var userloc = a.options[a.selectedIndex].value;
+if((loc=="Santacruz" ) && flag==1){
+		document.getElementById('mapid').innerHTML = "<div id='smap' style='width: 100%; height: 100%;'></div>";
+ 		var smap = L.map('smap').setView([ 19.084563, 72.834836 ], 13);
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA', {    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    		maxZoom: 18,    id: 'mapbox.streets',
+    		accessToken: 'pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA'
+		}).addTo(smap);
+		L.geoJSON(geojsonFeature_Santacruz,{style:myStyle_Santacruz}).addTo(smap);
+
+	} else if((loc=="Colaba" ) && flag==1){
+
+		document.getElementById('mapid').innerHTML = "<div id='cmap' style='width: 100%; height: 100%;'></div>";
+ 			var colabamap = new L.map('cmap').setView([ 18.92, 72.81 ], 13);
+			L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA', {
+    		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    		maxZoom: 18,
+    		id: 'mapbox.streets',
+    		accessToken: 'pk.eyJ1Ijoic2FoaWwtbWFwYm94IiwiYSI6ImNqc3VyMTVoNzIweTM0Ym82M3NuOGd4OTMifQ.ictab7heJhKcl5VjSLQjTA'
+			}).addTo(colabamap);
+ 
+			L.geoJSON(geojsonFeature_Colaba,{style:myStyle_Colaba}).addTo(colabamap);
+      
+	}
+ }
+ $(function() {
+  $("#toggle").click(function() {
+    if ($(this).is(":checked")) {
+      $("#div-api").hide();
+      $("#div-user").show();
+    } else {
+      $("#div-api").show();
+      $("#div-user").hide();
+    }
+  });
+});
+
+function clearfunction(){
+
+	document.getElementById("userhumidity").value="";
+document.getElementById("userrainfall").value="";
+	document.getElementById("userpressure").value="";
+	document.getElementById("usertemperature").value="";
+	document.getElementById("user-result").innerHTML="";
+	
+
+}
+
+</script>
+<style>
+ 
+    .form-style-4{
+        width: 100%;
+        font-size: 16px;
+        background: #E6E6FA;
+        padding: 30px 30px 15px 30px;
+        border: 5px solid #53687E;     
+    }
+    .form-style-4 input[type=submit],
+    .form-style-4 input[type=button],
+    .form-style-4 textarea,
+    .form-style-4 label
+    {   font-family: Georgia, "Times New Roman", Times, serif;
+        font-size: 16px;
+        color: black;    
+    }
+    .form-style-4 label {
+        display:inline-block;
+        margin-bottom: 10px;
+    }
+    .form-style-4 label > span{
+        display: inline-block;
+        float: left;
+        width: 150px;
+    }
+    .form-style-4 input[type=text],
+    .form-style-4 input[type=number] 
+    {   width: 275px;
+        outline: none;
+    }
+    .width{
+        width: 275px;
+        outline: none;
+    }
+.style-div{
+/*align-content: center;*/
+   
+   width: 95%;
+}
+    .form-style-4 input[type=submit],
+    .form-style-4 input[type=button]{
+       
+        border: 1px solid white;
+        padding: 8px 10px 8px 10px;
+        border-radius: 5px;
+        border-color: black;
+        color: black;
+    }
+    .form-style-4 input[type=submit]:hover,
+    .form-style-4 input[type=button]:hover{
+  
+    } 
+    
+    table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  width:600px;
+  color: black;
+  padding: 5px;
+  text-align: center;
+  font-size: 15px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+
+/* Hide default HTML checkbox */
+
+.switch input {
+  display: none;
+}
+
+
+/* The slider */
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+
+/* Rounded sliders */
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#div-user {
+display:none;
+}
+.style-div-toggle{
+	width: 95%;
+        font-size: 20px;
+        background: #E6E6FA;
+        padding:10px 30px 30px 30px;
+        border: 5px solid #53687E;
+        margin-bottom: 1px; 
+         font-family: Georgia, "Times New Roman", Times, serif;
+        color: black;    
+
+}
+.style-div-toggle label{
+	display:inline-block;
+	margin-top: 5px;
+
+}
+.style-div-toggle label > span{
+	display: inline-block;
+        float: left;
+        width: 100px;
+}
+</style>
+</head> 
+<body>
+<div class="style-div-toggle" style="height: 30%; padding: 10px 30px 10px 30px">
+	<label><span>User Input</span></label>
+	 <label class="switch">
+        <input type="checkbox" id="toggle"  style="margin-top: 5px;" />
+        <div class="slider round"></div>
+    </label></div>
+
+<div id="div-api"><div class="style-div">
+<form class="form-style-4" action="" method="post" >
+<label for ="field0">
+    <span>Location</span>
+    <select name="Location" id="location" class="width" onchange="report(this.value)" >
+        <option value="Santacruz">Santacruz</option> 
+        <option value="Colaba">Colaba</option>
+    </select>
+</label>
+
+<span><input type="button" id="fetchAPIData" style="margin-left: 35px;" value="Fetch Data through API" ></input></span>
+
+<span> </span>
+    <input type="button" value="Predict" id="predict" style="margin-left: 35px;"  />
+
+
+    <input type="button" value="Notify" id="notify" style="margin-left: 35px;"  />
+
+     <div id='wordResult'>
+<table style="width:100%; margin-top: 10px;" id="myTable">
+	
+  <tr >
+    <th>Date</th>
+    <th>Humidity</th> 
+    <th>PrecipMM/24h</th>
+    <th>Pressure</th>
+    <th>TempC</th> 
+    <th>WindSpeedKMPH</th>
+    <th>Result</th>
+  </tr>
+  <tr id='1'>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+  </tr>
+  <tr id='2'>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+  </tr>
+  <tr id='3'>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+  </tr>
+  <tr id='4'>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+  </tr>
+  <tr id='5'>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    
+  </tr>
+    <caption align="bottom">
+<div >Powered by <a style="color: black" href="https://www.worldweatheronline.com/" title="Weather API">World Weather Online</a>
+
+
+  </div></caption>
+</table>
+</div>
+</form></div>
+</div> <!--  <p id="demo1">R</p>    <p id="demo2">D</p>    <p id="demo3">T</p>-->
+    
+    <div id="div-user" class="style-div">
+    	<form class="form-style-4" action="" method="post">
+ <label for ="field0">
+    <span>Location</span>
+    <select name="Location" id="user-location" class="width" onchange="report(this.value); clearfunction();" >
+        <option value="Santacruz">Santacruz</option> 
+        <option value="Colaba">Colaba</option>
+    </select>
+</label><br>
+<label for="field1">
+<span>Humidity</span><input type="number" name="humidity" id="userhumidity" required="true" class="width"   pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" min="0"  oninput="this.value = Math.abs(this.value)" placeholder="Humidity "  />
+</label><br>
+<label for="field2">
+<span>Rainfall</span> 
+<input type="number" name="userrainfall" id="userrainfall"  required="true" class="width" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" min="0" oninput="this.value = Math.abs(this.value)"  placeholder="Rainfall " />
+</label><br>
+<label for="field3">
+<span>Pressure</span> 
+<input type="number" name="pressure" id="userpressure" required="true" class="width" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==4) return false;" min="0" oninput="this.value = Math.abs(this.value)"  placeholder="Pressure " s />
+</label><br>
+<label for="field4">
+    <span>Temperature</span>
+    <input type="number" name="Temperature" id="usertemperature" required="true" class="width" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" min="0" oninput="this.value = Math.abs(this.value)"  placeholder="Temperature " />
+</label><br>
+<input type="button" value="Predict" id="userpredict" style="margin-left: 35px;"  />
+
+
+    <input type="button" value="Notify" id="notify" style="margin-left: 35px;"  />
+
+<div>
+    <h4><p id="user-result">Result = </p></h4>
+</div>
+    	</form>
+
+    </div>
+<div style=" height: 300px; width: 98%;margin-top: 1px; padding: 10px 10px 10px 10px" class="style-div-toggle" id="mapid"></div>
+</body>
+</html>
